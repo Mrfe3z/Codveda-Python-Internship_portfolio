@@ -1,6 +1,6 @@
 nurses run
 stir grits
-this is to test the word counter to see if it works
+this is a short sentence to check my word counting solver
 aa
 aah
 aahed
