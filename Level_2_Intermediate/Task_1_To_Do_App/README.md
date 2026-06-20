@@ -1,43 +1,74 @@
-# Task 1: To-Do App
+# To‑Do App (PySide GUI)
 
-## Overview
-A task management application for the Codveda Python Development Internship - Level 2 Intermediate tasks.
+A compact, colorful desktop To‑Do application written in Python using PySide (Qt for Python). This is an original, self-directed GUI project by the repository owner that demonstrates practical desktop app patterns — adding tasks, viewing active vs completed tasks, marking tasks complete, and deleting tasks — packaged as a friendly learning project and a polished personal portfolio piece.
 
-## Description
-This task involves creating a to-do list application that allows users to manage tasks with persistent storage using object-oriented programming principles.
+Location
+--------
+This app lives at:
+Level_2_Intermediate/Task_1_To_Do_App
 
-## Features
-- Create, read, update, and delete tasks (CRUD operations)
-- Task categories or priority levels
-- Data persistence (file-based storage)
-- Mark tasks as complete/incomplete
-- Display tasks with filtering options
+Release
+-------
+Download pre-built packages (if available) from the repository Releases page:
+https://github.com/Mrfe3z/Codveda-Python-Internship_portfolio/releases
 
-## Requirements
-- Python 3.x
-- Optional: File I/O libraries for data persistence
+If an executable for your platform is attached to a release, prefer that over running from source.
 
-## Usage
-```bash
-python todo_app.py
-```
+Screenshot
+----------
+<img width="402" height="732" alt="image" src="https://github.com/user-attachments/assets/ff1de723-3ef8-4b8c-822f-7187c6849822" />
 
-## Structure
-- `todo_app.py` - Main application implementation
-- `tasks.json` or `tasks.txt` - Data storage (auto-created)
 
-## Learning Objectives
-- Understand object-oriented programming (classes, methods)
-- Implement CRUD operations
-- Work with file I/O for data persistence
-- Build a functional user interface
-- Practice data structure design
+About this project
+------------------
+- Toolkit: PySide (Qt for Python). If your code uses PySide6 specifically, replace `PySide` with `PySide6`.
+- Purpose: Personal project showcasing GUI design with Qt, event handling, and task-state management.
+- Scope: Simple CRUD-style task management with a two-tab interface (Active / Completed), plus UI actions for completing and deleting tasks.
 
-## Author
+Features
+--------
+- Add tasks using the text input and "Add Task" button
+- Two tabs: Active tasks and Completed tasks
+- Select a task and mark it completed to move it between tabs
+- Delete tasks permanently
+- Compact layout with visually distinct color styling
+
+Requirements
+------------
+- Python 3.7+ (3.8+ recommended)
+- PySide (PySide6 recommended) — install with pip:
+  pip install PySide6
+- pip install -r requirements.txt
+
+Run from source
+---------------
+1. Open a terminal in this folder.
+2. Launch the application. Example:
+   python todo_app.py
+
+Build a standalone executable
+------------------------------
+Use PyInstaller to create a single-file executable:
+
+pip install pyinstaller
+pyinstaller --onefile todo_app.py
+
+Attach the produced binary from `dist/` to a GitHub Release for distribution.
+
+Contributing & Improvements
+---------------------------
+Ideas:
+- Add persistence (save/load tasks using JSON or SQLite)
+- Add task metadata: due dates, priorities, or categories
+- Add search/filtering and keyboard shortcuts
+- Improve accessibility and keyboard focus handling
+
+To propose changes: open an issue or submit a pull request with a description of your improvement.
+
+License
+-------
+Refer to the repository root for licensing information or add a license of your choice.
+
+Author
+------
 Mrfe3z
-
-## Related
-This is part of the [Codveda Python Internship Portfolio](../..)
-
----
-*Task 1 of Level 2 Intermediate - Codveda Python Development Internship*
