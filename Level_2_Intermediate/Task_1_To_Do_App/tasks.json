@@ -1,8 +1,13 @@
 {
-    "active_tasks": [],
+    "active_tasks": [
+        "lay my bed"
+    ],
     "completed_tasks": [
         "go to sleep",
         "find my blue cap",
-        "go shopping"
+        "go shopping",
+        "find my black cap",
+        "go to sleep",
+        "take a nap"
     ]
 }

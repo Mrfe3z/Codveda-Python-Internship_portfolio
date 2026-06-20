@@ -1,18 +1,20 @@
 import random
 random_guess = random.randint(1, 100)
+# print(random_guess)
 
 attempts = 5
+
 while attempts > 0:
     print('guess a number between 1 and a 100')
     answer = input('>> ')
     try:
         answer = int(answer)
     except ValueError as e:
-        print('invalid input, enter a number within th range of 1 and 100')
+        print('invalid input, enter a number within the range of 1 and 100')
         continue
 
     if answer == random_guess and attempts == 5:
-        print(f'wow!, got the answer in one try. answer= {random_guess}')
+        print(f'wow!, got the answer in one try.')
         break
 
     if answer == random_guess:

@@ -5,9 +5,11 @@ import csv
 
 
 all_quotes = []
+page = 1
 
 url = 'https://quotes.toscrape.com'
 while True:
+    print(f'page {page}: Scraping')
     response = requests.get(url)
 
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -26,6 +28,8 @@ while True:
         page_num = next_button.find('a')['href']
 
         url = 'https://quotes.toscrape.com' + page_num
+        page += 1
+
     else:
         print("No more pages left. Scraping complete!")
         break
@@ -33,4 +37,3 @@ while True:
 with open('output.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
     writer.writerows(all_quotes)
- 

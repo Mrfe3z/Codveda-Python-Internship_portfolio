@@ -2,18 +2,27 @@ print('---simple calc---')
 
 
 def add_num(x, y):
+    ''' returns  x + y
+    '''
     return (x+y)
 
 
 def sub_num(x, y):
+    ''' returns x - y
+    '''
     return (x-y)
 
 
 def mult_num(x, y):
+    '''returns x * y
+    '''
     return x*y
 
 
 def div_num(x, y):
+    '''returns x/y,
+    handles division by zero error
+    '''
     try:
         return x/y
     except ZeroDivisionError as e:
@@ -41,12 +50,22 @@ while True:
         print('calc closed')
         break
 
-    try:
-        x = float(input('enter first number: >> '))
-        y = float(input('enter second number: >> '))
-    except ValueError as e:
-        print(e)
-        continue
+    x = input('enter first number: >> ')
+    y = input('enter second number: >> ')
+    if '.' in x or '.' in y:
+        try:
+            x = float(x)
+            y = float(y)
+        except ValueError as e:
+            print(e)
+            continue
+    else:
+        try:
+            x = int(x)
+            y = int(y)
+        except ValueError as e:
+            print(e)
+            continue
 
     if choice == 1:
         answer = add_num(x, y)
