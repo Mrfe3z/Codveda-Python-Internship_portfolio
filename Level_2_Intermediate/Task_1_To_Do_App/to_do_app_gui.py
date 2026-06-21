@@ -3,26 +3,16 @@ from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLineEdit, QListWidget
                                QPushButton, QVBoxLayout, QWidget, QMainWindow, QLabel, QTabWidget)
 from PySide6.QtCore import QSize, Qt
 
+from task_manager import TaskManager
 from color_widget import Color, QColor
 import sys
-import json
-
-app = QApplication(sys.argv)
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        try:
-            with open('tasks.json', 'r', encoding='UTF-8') as file:
-                save_data = json.load(file)
-
-                self.active_tasks_lists = save_data['active_tasks']
-                self.completed_tasks_lists = save_data['completed_tasks']
-        except FileNotFoundError:
-            self.active_tasks_lists = []
-            self.completed_tasks_lists = []
+        self.manager = TaskManager()
 
 # window settings
         self.setWindowTitle('TO-DO APP')
@@ -45,10 +35,10 @@ class MainWindow(QMainWindow):
         self.active_tasks_widget = QListWidget()
         self.completed_tasks_widget = QListWidget()
 
-        for task in self.active_tasks_lists:
+        for task in self.manager.active_tasks_lists:
             self.active_tasks_widget.addItem(task)
 
-        for task in self.completed_tasks_lists:
+        for task in self.manager.completed_tasks_lists:
             self.completed_tasks_widget.addItem(task)
 
         # text input field
@@ -107,49 +97,24 @@ class MainWindow(QMainWindow):
     def add_tasks(self):
         # print('clicked add button')
         task_name = self.input_field.text()
-        if task_name.strip() == '':
-            return
-        self.active_tasks_lists.append(task_name)
-        # update the visible list immediately
+        if not self.manager.add_tasks(task_name):
+            return  # manager rejected it (e.g. blank input) — do nothing
         self.active_tasks_widget.addItem(task_name)
         self.input_field.clear()
-        self.save_tasks()
 
     def delete_tasks(self):
         row = self.active_tasks_widget.currentRow()
         if row < 0:
             return  # nothing selected
-        del self.active_tasks_lists[row]
+        self.manager.del_tasks(row)
         self.active_tasks_widget.takeItem(row)
-        self.save_tasks()
 
     def completed_task(self):
         row = self.active_tasks_widget.currentRow()
         if row < 0:
             return  # nothing selected
-
-        # remove from active data, get the task name back
-        completed_task_name = self.active_tasks_lists.pop(row)
-        # add it to completed data
-        self.completed_tasks_lists.append(completed_task_name)
-
-        # remove from active widget
+        completed_name = self.manager.mark_completed_tasks(row)
+        if completed_name is None:
+            return  # manager rejected it (shouldn't normally happen here)
         self.active_tasks_widget.takeItem(row)
-        # add to completed widget
-        self.completed_tasks_widget.addItem(completed_task_name)
-
-        self.save_tasks()
-
-    def save_tasks(self):
-        save_data = {
-            'active_tasks': self.active_tasks_lists,
-            'completed_tasks': self.completed_tasks_lists
-        }
-        # Dump the whole dictionary into the file
-        with open('tasks.json', 'w', encoding='UTF-8') as file:
-            json.dump(save_data, file, indent=4)
-
-
-window = MainWindow()
-window.show()
-app.exec()
+        self.completed_tasks_widget.addItem(completed_name)
